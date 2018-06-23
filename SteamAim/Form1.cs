@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows;
+using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace SteamAim
 {
@@ -15,20 +16,77 @@ namespace SteamAim
     {
         static Size ScreenSize;
         static Bitmap bmp;
+        static bool Active;
+        static System.Windows.Forms.Timer Update_Timer, Reload_Timer;
+        static Point LevelPosition;
+
+        static Label InternalStatusLabel;
 
         public Form1()
         {
             InitializeComponent();
 
-            Timer timer = new Timer();
+            Update_Timer = new System.Windows.Forms.Timer();
+            Reload_Timer = new System.Windows.Forms.Timer();
 
-            timer.Tick += new EventHandler(OnTick);
+            Update_Timer.Tick += Update_Timer_Tick;
+            Reload_Timer.Tick += Reload_Timer_Tick;
 
-            timer.Interval = 350;
-            timer.Start();
+            Update_Timer.Interval = 450;
+            Reload_Timer.Interval = 130000;
+
+            Reload_Timer.Stop();
+            Update_Timer.Stop();
+
+            InternalStatusLabel = StatusLabel;
+
+            LevelPosition = new Point(Screen.PrimaryScreen.Bounds.Size.Width / 2, Screen.PrimaryScreen.Bounds.Size.Height / 2);
+
+            XPos.Text = Convert.ToString(Screen.PrimaryScreen.Bounds.Size.Width / 2);
+            YPos.Text = Convert.ToString(Screen.PrimaryScreen.Bounds.Size.Height / 2);
         }
 
-        private static void OnTick(Object myObject, EventArgs myEventArgs)
+        private void Reload_Timer_Tick(object sender, EventArgs e)
+        {
+            Cursor.Position = new Point(Screen.PrimaryScreen.Bounds.Size.Width / 2, Screen.PrimaryScreen.Bounds.Size.Height / 2);
+
+            Thread.Sleep(2500);
+
+            Cursor.Position = LevelPosition;
+        }
+
+        static void OnKeyDown()
+        {
+            Active = !Active;
+
+            if (Active)
+            {
+                InternalStatusLabel.Text = "Status: Running";
+                Update_Timer.Start();
+                Reload_Timer.Start();
+                UnHook();
+                SendKeys.SendWait("{F6}");
+                SetHook();
+            }
+            else
+            {
+                InternalStatusLabel.Text = "Status: Stopped";
+                Update_Timer.Stop();
+                Reload_Timer.Stop();
+                UnHook();
+                SendKeys.SendWait("{F6}");
+                SetHook();
+            }
+
+            /*try
+            {
+                LevelPosition.X = Convert.ToInt32(XPos.Text);
+                LevelPosition.Y = Convert.ToInt32(YPos.Text);
+            }
+            catch { }*/
+        }
+
+        void Update_Timer_Tick(Object myObject, EventArgs myEventArgs)
         {
             try
             {
@@ -41,11 +99,11 @@ namespace SteamAim
             }
             catch { }
 
-            for (int i = 0; i < bmp.Height; i += 5)
+            for (int i = 0; i < bmp.Width; i += 5)
             {
-                for (int j = 0; j < bmp.Width; j += 5)
+                for (int j = 0; j < bmp.Height; j += 5)
                 {
-                    Color col1 = bmp.GetPixel(j, i);
+                    Color col1 = bmp.GetPixel(i, j);
                     Color[] col_ref = new Color[2];
 
                     col_ref[0] = Color.FromArgb(39, 141, 220);
@@ -60,16 +118,81 @@ namespace SteamAim
 
                         if (hue == hue_ref[m])
                         {
-                            Cursor.Position = new Point(j - 75, i);
+                            Cursor.Position = new Point(i - 75, j);
 
                             SendKeys.SendWait("{1}");
                             SendKeys.SendWait("{3}");
                             SendKeys.SendWait("{4}");
                             SendKeys.SendWait("{5}");
+
+                            for (int delay = 0; delay < 1000000; ++delay) { }
                         }
                     }
                 }
             }
+
+            StatusLabel = InternalStatusLabel;
+        }
+
+
+        //обработка глобального нажатия f5
+        [DllImport("user32.dll")]
+        static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc callback, IntPtr hInstance, uint threadId);
+
+
+        [DllImport("user32.dll")]
+        static extern bool UnhookWindowsHookEx(IntPtr hInstance);
+
+        [DllImport("user32.dll")]
+        static extern IntPtr CallNextHookEx(IntPtr idHook, int nCode, int wParam, IntPtr lParam);
+
+        [DllImport("kernel32.dll")]
+        static extern IntPtr LoadLibrary(string lpFileName);
+
+        private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
+
+        const int WH_KEYBOARD_LL = 13; 
+        const int WM_KEYDOWN = 0x100; 
+
+        private static LowLevelKeyboardProc _proc = hookProc;
+
+        public static IntPtr hookProc(int code, IntPtr wParam, IntPtr lParam)
+        {
+            if (code >= 0 && wParam == (IntPtr)WM_KEYDOWN)
+            {
+                Keys keyCode = (Keys)Marshal.ReadInt32(lParam);
+
+                if (keyCode == Keys.F5)
+                    OnKeyDown();
+
+                return (IntPtr)1;
+            }
+            else
+                return CallNextHookEx(hhook, code, (int)wParam, lParam);
+        }
+
+
+        public static void UnHook()
+        {
+            UnhookWindowsHookEx(hhook);
+        }
+
+        private static IntPtr hhook = IntPtr.Zero;
+
+        public static void SetHook()
+        {
+            IntPtr hInstance = LoadLibrary("User32");
+            hhook = SetWindowsHookEx(WH_KEYBOARD_LL, _proc, hInstance, 0);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            SetHook();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UnHook();
         }
     }
 }
