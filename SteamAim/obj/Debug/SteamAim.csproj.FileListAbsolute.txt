@@ -1,0 +1,9 @@
+H:\Visual Studio\Projects\SteamAim\SteamAim\bin\Debug\SteamAim.exe.config
+H:\Visual Studio\Projects\SteamAim\SteamAim\bin\Debug\SteamAim.exe
+H:\Visual Studio\Projects\SteamAim\SteamAim\bin\Debug\SteamAim.pdb
+H:\Visual Studio\Projects\SteamAim\SteamAim\obj\Debug\SteamAim.csprojAssemblyReference.cache
+H:\Visual Studio\Projects\SteamAim\SteamAim\obj\Debug\SteamAim.Properties.Resources.resources
+H:\Visual Studio\Projects\SteamAim\SteamAim\obj\Debug\SteamAim.csproj.GenerateResource.cache
+H:\Visual Studio\Projects\SteamAim\SteamAim\obj\Debug\SteamAim.csproj.CoreCompileInputs.cache
+H:\Visual Studio\Projects\SteamAim\SteamAim\obj\Debug\SteamAim.exe
+H:\Visual Studio\Projects\SteamAim\SteamAim\obj\Debug\SteamAim.pdb

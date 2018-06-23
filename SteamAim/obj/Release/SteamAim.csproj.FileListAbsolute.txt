@@ -1,0 +1,8 @@
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\bin\Release\SteamAim.exe.config
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\bin\Release\SteamAim.exe
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\bin\Release\SteamAim.pdb
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.Properties.Resources.resources
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.csproj.GenerateResource.cache
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.csproj.CoreCompileInputs.cache
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.exe
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.pdb
