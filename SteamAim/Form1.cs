@@ -19,6 +19,7 @@ namespace SteamAim
         static bool Active;
         static System.Windows.Forms.Timer Update_Timer, Reload_Timer;
         static Point LevelPosition;
+        static Point ResetButtonOffset;
 
         static Label InternalStatusLabel;
 
@@ -40,6 +41,7 @@ namespace SteamAim
 
             InternalStatusLabel = StatusLabel;
 
+            ResetButtonOffset = new Point(0, -35);
             LevelPosition = new Point(Screen.PrimaryScreen.Bounds.Size.Width / 2, Screen.PrimaryScreen.Bounds.Size.Height / 2);
 
             XPos.Text = Convert.ToString(Screen.PrimaryScreen.Bounds.Size.Width / 2);
@@ -48,7 +50,7 @@ namespace SteamAim
 
         private void Reload_Timer_Tick(object sender, EventArgs e)
         {
-            Cursor.Position = new Point(Screen.PrimaryScreen.Bounds.Size.Width / 2, Screen.PrimaryScreen.Bounds.Size.Height / 2);
+            Cursor.Position = Add(new Point(Screen.PrimaryScreen.Bounds.Size.Width / 2, Screen.PrimaryScreen.Bounds.Size.Height / 2), ResetButtonOffset);
 
             Thread.Sleep(2500);
 
@@ -120,10 +122,10 @@ namespace SteamAim
                         {
                             Cursor.Position = new Point(i - 75, j);
 
-                            SendKeys.SendWait("{1}");
-                            SendKeys.SendWait("{3}");
-                            SendKeys.SendWait("{4}");
-                            SendKeys.SendWait("{5}");
+                            SendKeys.SendWait("%{1}");
+                            SendKeys.SendWait("%{3}");
+                            SendKeys.SendWait("%{4}");
+                            SendKeys.SendWait("%{5}");
 
                             for (int delay = 0; delay < 1000000; ++delay) { }
                         }
@@ -194,5 +196,7 @@ namespace SteamAim
         {
             UnHook();
         }
+
+        static Point Add(Point a, Point b) => new Point(a.X + b.X, a.Y + b.Y);
     }
 }
