@@ -25,7 +25,7 @@ namespace SteamAim
 
         static float ScreenWidth, ScreenHeight;
 
-        static float ScreenRation, ReferenceRatio;
+        static float ScreenRatio, ReferenceRatio;
 
         public Form1()
         {
@@ -47,10 +47,10 @@ namespace SteamAim
             ScreenWidth = Screen.PrimaryScreen.Bounds.Size.Width;
             ScreenHeight = Screen.PrimaryScreen.Bounds.Size.Height;
 
-            ScreenRation = ScreenWidth / ScreenHeight;
+            ScreenRatio = ScreenWidth / ScreenHeight;
             ReferenceRatio = (float)16 / (float)10;
 
-            if (ScreenRation == ReferenceRatio)
+            if (ScreenRatio == ReferenceRatio)
                 ResetButtonOffset = new Point(0, -45);
 
             LevelPosition = new Point(Convert.ToInt32(ScreenWidth) / 2, Convert.ToInt32(ScreenHeight) / 2);
