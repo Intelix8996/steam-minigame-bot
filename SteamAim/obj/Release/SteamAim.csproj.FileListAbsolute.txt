@@ -16,3 +16,5 @@ H:\VisualStudio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.csproj
 H:\VisualStudio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.csproj.CoreCompileInputs.cache
 H:\VisualStudio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.exe
 H:\VisualStudio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.pdb
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.csprojAssemblyReference.cache
+H:\Visual Studio\Projects\steam-minigame-bot\SteamAim\obj\Release\SteamAim.Bot.resources

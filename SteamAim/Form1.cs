@@ -12,7 +12,7 @@ using System.Runtime.InteropServices;
 
 namespace SteamAim
 {
-    public partial class Form1 : Form
+    public partial class Bot : Form
     {
         static Size ScreenSize;
         static Bitmap bmp;
@@ -27,7 +27,7 @@ namespace SteamAim
 
         static float ScreenRatio, ReferenceRatio;
 
-        public Form1()
+        public Bot()
         {
             InitializeComponent();
 
