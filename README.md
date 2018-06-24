@@ -5,12 +5,12 @@
   2.Download autoclicker [Here](https://sourceforge.net/projects/orphamielautoclicker/files/latest/download) <br>
 
 ## Usage:
-  1.Open autoclicker
-  2.Set interval to 10 milliseconds
-  3.Open bot
-  4.Open steam minigame
-  5.In level select, point your cursor to the level you want to play
-  6.Hold F5 for 0.5 - 1 seconds
+  1.Open autoclicker <br>
+  2.Set interval to 10 milliseconds <br>
+  3.Open bot <br>
+  4.Open steam minigame <br>
+  5.In level select, point your cursor to the level you want to play <br>
+  6.Hold F5 for 0.5 - 1 seconds <br>
   
 Bot will automaticly start new round.
 
