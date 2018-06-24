@@ -11,7 +11,11 @@
   4.Open steam minigame <br>
   5.In level select, point your cursor to the level you want to play <br>
   6.Hold F5 for 0.5 - 1 seconds <br>
-  
-Bot will automaticly start new round.
 
-To stop Bot hold F5 for 0.5 - 1 second.
+### It's recomedned to play green character
+
+##### Bot will automaticly start new round.
+
+##### To stop Bot hold F5 for 0.5 - 1 second.
+
+
