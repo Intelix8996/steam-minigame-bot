@@ -1,8 +1,8 @@
 A bot that plays steam summer sale 2018 minigame.
 
 Installation:  
- \t 1.Download bot\n
- \t 2.Download autoclicker\n
+  1.Download bot
+  2.Download autoclicker
 
 Usage:
   1.Open autoclicker
