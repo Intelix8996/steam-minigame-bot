@@ -23,6 +23,10 @@ namespace SteamAim
 
         static Label InternalStatusLabel;
 
+        static float ScreenWidth, ScreenHeight;
+
+        static float ScreenRation, ReferenceRatio;
+
         public Form1()
         {
             InitializeComponent();
@@ -32,25 +36,29 @@ namespace SteamAim
 
             Update_Timer.Tick += Update_Timer_Tick;
             Reload_Timer.Tick += Reload_Timer_Tick;
-
             Update_Timer.Interval = 450;
-            Reload_Timer.Interval = 130000;
+            Reload_Timer.Interval = 135000;
 
             Reload_Timer.Stop();
             Update_Timer.Stop();
 
             InternalStatusLabel = StatusLabel;
 
-            ResetButtonOffset = new Point(0, -35);
-            LevelPosition = new Point(Screen.PrimaryScreen.Bounds.Size.Width / 2, Screen.PrimaryScreen.Bounds.Size.Height / 2);
+            ScreenWidth = Screen.PrimaryScreen.Bounds.Size.Width;
+            ScreenHeight = Screen.PrimaryScreen.Bounds.Size.Height;
 
-            XPos.Text = Convert.ToString(Screen.PrimaryScreen.Bounds.Size.Width / 2);
-            YPos.Text = Convert.ToString(Screen.PrimaryScreen.Bounds.Size.Height / 2);
+            ScreenRation = ScreenWidth / ScreenHeight;
+            ReferenceRatio = (float)16 / (float)10;
+
+            if (ScreenRation == ReferenceRatio)
+                ResetButtonOffset = new Point(0, -45);
+
+            LevelPosition = new Point(Convert.ToInt32(ScreenWidth) / 2, Convert.ToInt32(ScreenHeight) / 2);
         }
 
         private void Reload_Timer_Tick(object sender, EventArgs e)
         {
-            Cursor.Position = Add(new Point(Screen.PrimaryScreen.Bounds.Size.Width / 2, Screen.PrimaryScreen.Bounds.Size.Height / 2), ResetButtonOffset);
+            Cursor.Position = Add(new Point(Convert.ToInt32(ScreenWidth) / 2, Convert.ToInt32(ScreenHeight) / 2), ResetButtonOffset);
 
             Thread.Sleep(2500);
 
@@ -64,28 +72,29 @@ namespace SteamAim
             if (Active)
             {
                 InternalStatusLabel.Text = "Status: Running";
+
                 Update_Timer.Start();
                 Reload_Timer.Start();
+
                 UnHook();
+
+                LevelPosition = Cursor.Position;
+
                 SendKeys.SendWait("{F6}");
+
                 SetHook();
             }
             else
             {
                 InternalStatusLabel.Text = "Status: Stopped";
+
                 Update_Timer.Stop();
                 Reload_Timer.Stop();
+
                 UnHook();
                 SendKeys.SendWait("{F6}");
                 SetHook();
             }
-
-            /*try
-            {
-                LevelPosition.X = Convert.ToInt32(XPos.Text);
-                LevelPosition.Y = Convert.ToInt32(YPos.Text);
-            }
-            catch { }*/
         }
 
         void Update_Timer_Tick(Object myObject, EventArgs myEventArgs)
