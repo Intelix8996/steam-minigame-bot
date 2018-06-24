@@ -1,8 +1,8 @@
 # A bot that plays steam summer sale 2018 minigame.
 ***
 ## Installation:  
-  1.Download bot [Here](https://github.com/Intelix8996/steam-minigame-bot/releases/download/untagged-b7494d7bd750e3c92bef/SteamAim.exe) <hr>
-  2.Download autoclicker [Here](https://sourceforge.net/projects/orphamielautoclicker/files/latest/download) <hr>
+  1.Download bot [Here](https://github.com/Intelix8996/steam-minigame-bot/releases/download/untagged-b7494d7bd750e3c92bef/SteamAim.exe)
+  2.Download autoclicker [Here](https://sourceforge.net/projects/orphamielautoclicker/files/latest/download)
 ***
 ## Usage:
   1.Open autoclicker
